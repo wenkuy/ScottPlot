@@ -19,13 +19,18 @@ public partial class DisplayScaling : Window, IDemoWindow
         Crosshair = WpfPlot1.Plot.Add.Crosshair(0, 0);
 
         MouseMove += DisplayScaling_MouseMove;
+        
     }
 
     private void DisplayScaling_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
     {
+        //获取逻辑像素位置
         Point p = e.GetPosition(WpfPlot1);
-        ScottPlot.Pixel mousePixel = new(p.X * WpfPlot1.DisplayScale, p.Y * WpfPlot1.DisplayScale);
+
+        //获取实际像素位置
+        ScottPlot.Pixel mousePixel = new(p.X * WpfPlot1.DisplayScale, p.Y * WpfPlot1.DisplayScale); 
         ScottPlot.Coordinates coordinates = WpfPlot1.Plot.GetCoordinates(mousePixel);
+
         Crosshair.Position = coordinates;
         WpfPlot1.Refresh();
     }

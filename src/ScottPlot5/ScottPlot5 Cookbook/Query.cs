@@ -41,7 +41,11 @@ public static class Query
     {
         List<ICategory> categories = AppDomain.CurrentDomain
             .GetAssemblies()
-            .SelectMany(x => x.GetTypes())
+            .SelectMany(assembly => 
+            {
+                try { return assembly.GetTypes(); }
+                catch (ReflectionTypeLoadException) { return Type.EmptyTypes; }
+            })
             .Where(type => type.IsClass && !type.IsAbstract)
             .Where(type => typeof(ICategory).IsAssignableFrom(type))
             .Select(Activator.CreateInstance)

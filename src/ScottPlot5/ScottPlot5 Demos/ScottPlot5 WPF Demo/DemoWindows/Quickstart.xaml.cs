@@ -14,5 +14,6 @@ public partial class Quickstart : Window, IDemoWindow
 
         WpfPlot1.Plot.Add.Signal(ScottPlot.Generate.Sin());
         WpfPlot1.Plot.Add.Signal(ScottPlot.Generate.Cos());
+        WpfPlot1.Plot.HideGrid();
     }
 }
